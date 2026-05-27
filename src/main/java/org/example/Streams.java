@@ -8,14 +8,42 @@ import java.util.stream.Stream;
 public class Streams {
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1, 2, 2, 6, 8, 3, 4, 5, 6, 7, 8, 9, 0, 12, 1234, 5, 35346, 3545, 832, 768);
+        Integer filteredList = list.stream()
+                .filter(x -> x % 2 == 0)
+                .peek(x -> System.out.println(x))
+                .map(x -> x / 2)
+                .peek(x -> System.out.println(x))
+                .distinct()
+                .peek(x -> System.out.println(x))
+                .sorted((a, b) -> (b - a))
+                .peek(x -> System.out.println(x))
+                .limit(4)
+                .peek(x -> System.out.println(x))
+                .skip(1)
+                .peek(x -> System.out.println(x))
+                .max((a, b) -> (b - a)).get();
+        System.out.println(filteredList);
+    }
+
+    public void testStreamFunctions() {
+        List<Integer> list = Arrays.asList(1, 2, 2, 6, 8, 3, 4, 5, 6, 7, 8, 9, 0, 12, 1234, 5, 35346, 3545, 832, 768);
         List<Integer> filteredList = list.stream()
                 .filter(x -> x % 2 == 0)
+                .map(x -> x / 2)
                 .distinct()
-                .sorted((a, b) -> b - a)
+                .sorted((a, b) -> (b - a))
+                .limit(4)
+                .skip(1)
+                .peek(x -> System.out.println(x))
                 .collect(Collectors.toList());
         System.out.println(filteredList);
-
-
+        // output
+        /*
+        617
+        416
+        384
+        [617, 416, 384]
+        * */
     }
 
     public void testStreamGeneration() {
