@@ -57,5 +57,15 @@ public class Streams {
         Stream<Integer> iterateStream = Stream.iterate(0, n -> n + 1).limit(100);
     }
 
+    public void returnSquaredEvenNumbers() {
+        List<Integer> numList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> squaredList = numList.stream().
+                filter(x -> x % 2 == 0)
+                .map(x -> x * x)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+        System.out.println(squaredList);
+    }
+
 
 }
